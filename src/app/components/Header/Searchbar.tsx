@@ -4,7 +4,7 @@ import React from 'react';
 import { useSidebarContext } from '../Sidebar';
 import { FaSearch } from 'react-icons/fa';
 import { MdMenu } from 'react-icons/md';
-import { Button, Input, InputGroup, InputLeftAddon } from '@chakra-ui/react';
+import { Button, TextInput } from '@mantine/core';
 
 export default function Searchbar({ responsive }: { responsive?: boolean; }) {
     const { setContext } = useSidebarContext();
@@ -17,19 +17,19 @@ export default function Searchbar({ responsive }: { responsive?: boolean; }) {
 
     return (
         <div className='ms-auto'>
-            <InputGroup size='md' className={(responsive ?? true ? 'hidden sm:flex' : 'flex') + ' bg-white bg-opacity-10 [&_input]:bg-transparent [&_input]:text-white [&_input]:placeholder:text-white [&_input]:placeholder:text-opacity-50 border-none rounded-md [&_input:focus]:w-80 ' + inria.className}>
-                <InputLeftAddon bg='transparent' border='none'>
-                    <FaSearch color='white' cursor='pointer' />
-                </InputLeftAddon>
-                <Input border='none'
+            <TextInput size='md'
 
-                    placeholder='Search'
-                />
-            </InputGroup>
+                leftSection={<FaSearch color='white' cursor='pointer' />}
+                placeholder='Search'
+                classNames={{
+                    input: 'bg-white bg-opacity-5 placeholder:text-white placeholder:opacity-50',
+                }}
+                className={(responsive ?? true ? 'hidden sm:flex' : 'flex') + ' ' + inria.className}>
+            </TextInput>
 
-            <Button 
-            variant='ghost'
-            className={(responsive ?? true ? 'sm:hidden' : 'hidden') + ' p-0 text-white'}>
+            <Button
+                variant='subtle'
+                className={(responsive ?? true ? 'sm:hidden' : 'hidden') + ' p-0 text-white'}>
                 <MdMenu className='' size={30} onClick={onMenuButtonClick} />
             </Button>
         </div>

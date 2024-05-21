@@ -41,7 +41,7 @@
 body {
     color: rgb(var(--foreground-rgb));
     background-color: #34353A;
-    background-color: #34353A linear-gradient(-45deg, #FFC86B55, #34353A 90%) !important;
+    background: #34353A linear-gradient(-45deg, #FFC86B55, #34353A 90%) !important;
     overflow-x: hidden;
 }
 
@@ -173,4 +173,22 @@ header {
     50% {
         border-color: orange;
     }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    10% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.landing-section {
+    animation: fade-out linear;
+    animation-timeline: scroll(nearest block);
 }

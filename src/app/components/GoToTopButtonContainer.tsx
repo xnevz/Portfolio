@@ -18,7 +18,7 @@ export default function GoToTopButtonContainer({ children, ...props }: HTMLAttri
         <div {...props} ref={mainRef}>
             {children}
             <TransparentButton
-                onClick={onGoToTop}
+                onClick={() => onGoToTop()}
                 className='fixed m-10 bottom-0 end-0 !shadow-lg shadow-black z-20' style={{
                     opacity: scrollTop === 0 || scrollTop === null ? 0 : 1,
                     backgroundColor: 'rgb(62 63 68)'
@@ -41,24 +41,24 @@ function debounce(func: () => void, timeout = 100) {
 function useScrollTop(ref: React.RefObject<HTMLDivElement>) {
     const [scrollTop, setScrollTop] = useState<number | null>(null);
 
-
     useLayoutEffect(() => {
-        if (ref.current === null)
+        const cur = ref.current;
+        if (cur === null)
             return;
-
 
         const onScroll = debounce(() => {
 
-            if (ref.current === null)
+            if (cur === null)
                 return;
 
-            setScrollTop(ref.current.scrollTop);
+            setScrollTop(cur.scrollTop);
         });
-        ref.current?.addEventListener('scroll', onScroll);
+
+        cur.addEventListener('scroll', onScroll);
         return () => {
-            ref.current?.removeEventListener('scroll', onScroll);
+            cur.removeEventListener('scroll', onScroll);
         };
-    }, [ref.current]);
+    }, [ref]);
 
     return scrollTop;
 }

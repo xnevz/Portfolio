@@ -1,9 +1,8 @@
 'use client';
 
+import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay } from '@mantine/core';
 import React, { createContext, useContext, useState } from 'react';
 import Searchbar from './Header/Searchbar';
-import { MdClose } from 'react-icons/md';
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input } from '@chakra-ui/react';
 
 export default function Sidebar() {
     const { context: { open }, setContext } = useSidebarContext();
@@ -11,17 +10,11 @@ export default function Sidebar() {
     function closeSidebar() {
         setContext({ open: false });
     }
-    /**<Drawer
-                placement='right'
-                isOpen={open}
-                onClose={() => setContext({ open: false })}
-            >
-                
-            </Drawer> */
+
     return (
         <Drawer
-            placement='right'
-            isOpen={open}
+            position='right'
+            opened={open}
             onClose={closeSidebar}
         >
             <DrawerOverlay />
@@ -42,8 +35,6 @@ export default function Sidebar() {
                     </ul>
                 </DrawerBody>
 
-                <DrawerFooter>
-                </DrawerFooter>
             </DrawerContent>
         </Drawer>
     );
